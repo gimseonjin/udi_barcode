@@ -1,0 +1,40 @@
+
+
+    <div class="sidebar" data = "blue">
+      <div class="sidebar-wrapper">
+        <div class="logo">
+          <a href="/" class="simple-text logo-mini">
+            UDI
+          </a>
+          <a href="/" class="simple-text logo-normal">
+            Home
+          </a>
+        </div>
+
+        <ul class="nav">
+        {% if request.user.is_authenticated %}
+
+          <li class="{% if 'index' in segment %} active {% endif %}">
+            <a href="/">
+              <i class="tim-icons icon-chart-pie-36"></i>
+              <p>Recognition</p>
+            </a>
+          </li>
+          <li class="{% if 'dashboard' in segment %} active {% endif %}">
+            <a href="/dashboard">
+              <i class="tim-icons icon-atom"></i>
+              <p>My Dashboard</p>
+            </a>
+          </li>
+          <li class="{% if 'user' in segment %} active {% endif %}">
+            <a href="/user">
+              <i class="tim-icons icon-pin"></i>
+              <p>My Page</p>
+            </a>
+          </li>
+          {% endif %}
+                    
+        </ul>
+        
+      </div>
+    </div>

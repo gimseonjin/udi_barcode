@@ -1,0 +1,48 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Dashboard {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<div class="row">
+  <div class="col-md-12">
+      <div class="card card-profile">
+          <div class="card-body">
+            <div class="index-title">
+              <h4 class="card-title">
+                  Input Your UDI Barcode Image! 
+              </h4>
+              <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <button onclick="sendImage()" class="btn btn-primary mt-3">Click me</button>
+              </div>
+            </div>
+              <div class="container col-md-12">
+                <div class="mb-5 select-image">
+                    <label for="Image" class="form-label">Select Image Please</label>
+                    <input class="form-control" type="file" id="formFile" onchange="preview()">
+                </div>
+                <img id="frame" src="" class="img-fluid" />
+            </div>
+    
+          </div>
+      </div>
+  </div>
+</div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+<script>
+  function preview() {
+      frame.src = URL.createObjectURL(event.target.files[0]);
+  }
+  function sendImage() {
+      document.getElementById('formFile').value = null;
+      frame.src = "/static/assets/img/loading.gif";
+  }
+</script>
+{% endblock javascripts %}

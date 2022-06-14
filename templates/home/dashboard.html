@@ -1,0 +1,120 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Dashboard {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<div class="row">
+  <div class="col-md-12">
+      <div class="card card-profile">
+          <div class="card-body">
+              <h2 class="card-title">
+                History
+              </h2>
+
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th class = "table-title" scope="col">#</th>
+                    <th class = "table-title" scope="col">dates</th>
+                    <th class = "table-title" scope="col">image</th>
+                    <th class = "table-title" scope="col">recognized</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    {% for result in results %}
+                        <tr class = "data-class" data-toggle="modal" data-target="#myModal" 
+                            data-src="{{result.img_path}}" 
+                            data-result="{{result.recognized}}"
+                            data-udi="{{result.udi}}">
+                          <th scope="row">{{result.id}}</th>
+                          <td class = "table-rows" >{{result.dates}}</td>
+                          <td class = "table-rows" >{{result.img_path}}</td>
+                            {% if result.recognized %}
+                            <td class = "table-rows" >
+                                <div class="result-success rounded-circle">
+                                </div>
+                            </td>
+                            {% else %}
+                            <td class = "table-rows" >
+                                <div class="result-fail rounded-circle">
+                                </div>
+                            </td>
+                            {% endif %}
+                        </tr>
+                    {% endfor %}
+                </tbody>
+              </table>
+          </div>
+      </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div id = "myModal" class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="exampleModalLabel">Detailed description</h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <table class="table">
+            <thead>
+              <tr>
+                <th class = "table-title" scope="col">udi value</th>
+                <th class = "table-title" scope="col">result</th>
+              </tr>
+            </thead>
+            <tbody>
+                <td id="udi"></td>
+                <td id="result"></td>
+            </tbody>
+          </table>
+        <img id="my_image" />
+        </src>
+      </div>
+      <div class="modal-footer justify-content-md-end">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+<script>
+$(document).on("click", ".data-class", function () {
+ var imgsrc = $(this).data('src');
+ var result = $(this).data('result');
+ var udi = $(this).data('udi');
+
+ console.log(result)
+ console.log(udi)
+ $('#my_image').attr('src',imgsrc);
+ $('#udi').html(udi);
+ if(result == "True"){
+    $('#result').html(
+        `
+        <div class="result-success rounded-circle">
+        </div>
+        `
+    );
+ }else{
+    $('#result').html(
+        `
+        <div class="result-fail rounded-circle">
+        </div>
+        `
+    );
+
+ }
+});
+</script>
+{% endblock javascripts %}
