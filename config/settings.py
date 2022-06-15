@@ -36,7 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'barcode_server'
+    "barcode_server.apps.BarcodeServerConfig"
 ]
 
 MIDDLEWARE = [

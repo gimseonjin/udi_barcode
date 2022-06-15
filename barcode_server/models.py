@@ -29,9 +29,9 @@ class Result(models.Model):
 
     Attributes:
         user (Djang admin User) : This is One To One Filed our user
-        date (Date Time) : This is date when we do
         recognized (boolean) : This is boolean about recognition
         udi (string) : This is UDi barcode data
+        img_path (string) : THis is img path
     '''
     user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
     dates = models.DateTimeField(auto_now_add=True)

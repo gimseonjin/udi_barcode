@@ -10,24 +10,27 @@
 <div class="row">
   <div class="col-md-12">
       <div class="card card-profile">
+        <form role="form" method="post" action="" enctype="multipart/form-data">
+          {% csrf_token %} 
           <div class="card-body">
+            
             <div class="index-title">
               <h4 class="card-title">
                   Input Your UDI Barcode Image! 
               </h4>
               <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                <button onclick="sendImage()" class="btn mt-3">Click me</button>
+                <button onclick="sendImage()" type = "submit" class="btn mt-3">Click me</button>
               </div>
             </div>
               <div class="container col-md-12">
                 <div class="mb-5 select-image">
                     <label for="Image" class="form-label">Select Image Please</label>
-                    <input class="form-control" type="file" id="formFile" onchange="preview()">
+                    <input class="form-control" type="file" required id="id_file" name="file" onchange="preview()">
                 </div>
                 <img id="frame" src="" class="img-fluid" />
             </div>
-    
           </div>
+        </form>
       </div>
   </div>
 </div>
@@ -41,8 +44,7 @@
       frame.src = URL.createObjectURL(event.target.files[0]);
   }
   function sendImage() {
-      if(document.getElementById('formFile').value != ""){
-        document.getElementById('formFile').value = null;
+      if(document.getElementById('id_file').value != ""){
         frame.src = "/static/assets/img/loading.gif";
       }else{
         alert("Input Image First!!")

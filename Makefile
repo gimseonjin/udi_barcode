@@ -6,7 +6,7 @@ lint:
 	--disable=E5142 \
 	--disable=C0301 \
 	--disable=C0103 \
-	--django-settings-module=config.settings ./barcode_server
+	--django-settings-module=config.settings ./config
 
 checklist: typehint lint
 

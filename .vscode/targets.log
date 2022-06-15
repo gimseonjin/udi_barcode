@@ -7,7 +7,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 
 # This program built for i386-apple-darwin11.3.0
 
-# Make data base, printed on Wed Jun 15 14:07:34 2022
+# Make data base, printed on Wed Jun 15 17:56:45 2022
 
 # Variables
 
@@ -15,8 +15,6 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 <D = $(patsubst %/,%,$(dir $<))
 # automatic
 ?F = $(notdir $?)
-# environment
-ELECTRON_NO_ATTACH_CONSOLE = 1
 # environment
 VSCODE_LOG_NATIVE = false
 # automatic
@@ -40,9 +38,9 @@ VSCODE_VERBOSE_LOGGING = true
 # environment
 __CFBundleIdentifier = com.microsoft.VSCode
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /var/folders/sz/0695dtz15cd4vf3whn03g2180000gn/T/vscode-ipc-0e3546f1-b6ad-42b7-b2fd-bde4c4f60aa8.sock
+VSCODE_IPC_HOOK_EXTHOST = /var/folders/sz/0695dtz15cd4vf3whn03g2180000gn/T/vscode-ipc-e1ae54ce-c403-4740-a73d-76e948c74163.sock
 # environment
-VSCODE_CWD = /Users/mac/Documents/exam
+VSCODE_CWD = /
 # environment
 PATH = /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
 # environment
@@ -68,8 +66,6 @@ HOME = /Users/mac
 # default
 MAKEFILEPATH = $(shell /usr/bin/xcode-select -print-path 2>/dev/null || echo /Developer)/Makefiles
 # environment
-VSCODE_CLI = 1
-# environment
 VSCODE_CODE_CACHE_PATH = /Users/mac/Library/Application Support/Code/CachedData/4af164ea3a06f701fe3e89a2bcbb421d2026b68f
 # environment
 LOGNAME = mac
@@ -86,21 +82,17 @@ MAKE = $(MAKE_COMMAND)
 # default
 MAKECMDGOALS := all
 # environment
-SHLVL = 3
+SHLVL = 1
 # default
 MAKE_VERSION := 3.81
 # environment
 USER = mac
 # makefile
 .DEFAULT_GOAL := typehint
-# environment
-TERM_SESSION_ID = 828F989D-65CB-47EC-B32E-E9A695B40C91
 # automatic
 %D = $(patsubst %/,%,$(dir $%))
 # default
 MAKE_COMMAND := /Library/Developer/CommandLineTools/usr/bin/make
-# environment
-TERM_PROGRAM = Apple_Terminal
 # default
 .VARIABLES := 
 # environment
@@ -116,9 +108,7 @@ MFLAGS = -Rrqp
 # automatic
 *D = $(patsubst %/,%,$(dir $*))
 # environment
-TERM_PROGRAM_VERSION = 445
-# environment
-XPC_SERVICE_NAME = application.com.microsoft.VSCode.213379.213385.9B6BCA8F-30BE-4A1B-AB5D-864546425317
+XPC_SERVICE_NAME = application.com.microsoft.VSCode.213379.213385
 # automatic
 +D = $(patsubst %/,%,$(dir $+))
 # automatic
@@ -144,11 +134,9 @@ MAKELEVEL := 0
 # environment
 LANG = C
 # environment
-TERM = xterm-256color
-# environment
-VSCODE_PID = 1195
+VSCODE_PID = 5705
 # variable set hash-table stats:
-# Load=68/1024=7%, Rehash=0, Collisions=1/92=1%
+# Load=62/1024=6%, Rehash=0, Collisions=1/86=1%
 
 # Pattern-specific Variable Values
 
@@ -189,7 +177,7 @@ all:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-06-14 18:04:30
+#  Last modified 2022-06-15 17:23:54
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -226,7 +214,10 @@ lint:
 	--disable=E5142 \
 	--disable=C0301 \
 	--disable=C0103 \
-	--django-settings-module=config.settings ./barcode_server
+	--django-settings-module=config.settings ./config
+ 
+make: *** No rule to make target `all'.  Stop.
+
 	
 
 # files hash-table stats:
@@ -242,8 +233,6 @@ lint:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Wed Jun 15 14:07:34 2022
+# Finished Make data base on Wed Jun 15 17:56:45 2022
 
  
-make: *** No rule to make target `all'.  Stop.
-

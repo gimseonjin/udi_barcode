@@ -4,22 +4,39 @@ This is Views(business logic) in Barcode_server
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.core.files.storage import default_storage
+from django.core.files.base import ContentFile
 
-from barcode_server.forms import LoginForm, SignUpForm
-from barcode_server.models import Result
+from barcode_server.forms import LoginForm, SignUpForm, UploadFileForm
+from barcode_server.models import Result, User
+from barcode_server.service.BarcodeService import BarcodeService
+from barcode_server.models import User
 
 # Create your views here.
-
 
 @login_required(login_url="/login/")
 def index(request):
     context = {'segment': 'index'}
+    if request.method == 'POST':
+        form = UploadFileForm(request.POST, request.FILES)
+        if form.is_valid():
+            f = request.FILES["file"]
+            user_one = User.objects.filter(user_id=request.user.id).first()
+            print(user_one.__dict__)
+            path = default_storage.save('static/media/barcode.jpeg', ContentFile(f.read()))
+            barcodeService = BarcodeService()
+            msg = barcodeService.uploadSerivce(path)
+            result = Result(user=user_one,recognized=msg.get("msg"),udi=msg.get("data"),img_path="/"+path)
+            result.save()
+            return render(request, 'home/index.html', context)
+    else:
+        form = UploadFileForm()
     return render(request, 'home/index.html', context)
 
 
 @login_required(login_url="/login/")
 def dashboard(request):
-    results = Result.objects.filter(user_id = request.user.id).all()
+    results = Result.objects.filter(user_id = request.user.id).all().order_by('-dates')
     context = {'segment': 'dashboard', "results" : results}
     return render(request, 'home/dashboard.html', context)
 
@@ -57,7 +74,9 @@ def register_user(request):
     if request.method == "POST":
         form = SignUpForm(request.POST)
         if form.is_valid():
-            form.save()
+            admin_user=form.save()
+            user = User(user=admin_user)
+            user.save()
             username = form.cleaned_data.get("username")
             raw_password = form.cleaned_data.get("password1")
             authenticate(username=username, password=raw_password)
