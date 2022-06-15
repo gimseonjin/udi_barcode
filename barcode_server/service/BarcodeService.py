@@ -3,6 +3,9 @@ import pyzbar.pyzbar as pyzbar
 import cv2
 from datetime import datetime
 import numpy as np
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 class BarcodeService:
 
@@ -12,7 +15,7 @@ class BarcodeService:
 
         i = self.preprocessing(img)
 
-        itemResultDto = self.read_frame(i)
+        itemResultDto = self.read_frame(i, path)
 
         return itemResultDto
             
@@ -29,19 +32,24 @@ class BarcodeService:
 
         return gray
     
-    def read_frame(self, img):
+    def read_frame(self, img, path):
         try:
             decorded = pyzbar.decode(img)
 
             value = decorded[0].data.decode('utf-8')
+
+            for d in decorded:
+                cv2.rectangle(img, (d.rect[0], d.rect[1]), (d.rect[0] + d.rect[2], d.rect[1] + d.rect[3]), (0, 0, 255), 5)
             
+            cv2.imwrite("./"+path, img)
+
             result = self.read_barcode(value)
 
             return {"msg" : True, "data": result }
 
         except Exception as e:
 
-            return {"msg" : False, "data": None }
+            return {"msg" : False, "data": "None" }
     
     def read_barcode(self, value):
         value = value.replace('\u001d', '')

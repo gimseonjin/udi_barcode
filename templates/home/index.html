@@ -22,11 +22,25 @@
                 <button onclick="sendImage()" type = "submit" class="btn mt-3">Click me</button>
               </div>
             </div>
+            
               <div class="container col-md-12">
-                <div class="mb-5 select-image">
+                <div class="select-image">
                     <label for="Image" class="form-label">Select Image Please</label>
                     <input class="form-control" type="file" required id="id_file" name="file" onchange="preview()">
                 </div>
+
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th class = "table-title" scope="col">udi value</th>
+                      <th class = "table-title" scope="col">result</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                      <td id="udi">{{data}}</td>
+                      <td id="result">{{msg}}</td>
+                  </tbody>
+                </table>
                 <img id="frame" src="" class="img-fluid" />
             </div>
           </div>
@@ -34,13 +48,14 @@
       </div>
   </div>
 </div>
-
 {% endblock content %}
 
 <!-- Specific Page JS goes HERE  -->
 {% block javascripts %}
 <script>
   function preview() {
+      document.getElementById('udi').innerHTML = ""
+      document.getElementById('result').innerHTML = ""
       frame.src = URL.createObjectURL(event.target.files[0]);
   }
   function sendImage() {

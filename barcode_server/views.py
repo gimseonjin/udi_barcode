@@ -22,12 +22,13 @@ def index(request):
         if form.is_valid():
             f = request.FILES["file"]
             user_one = User.objects.filter(user_id=request.user.id).first()
-            print(user_one.__dict__)
             path = default_storage.save('static/media/barcode.jpeg', ContentFile(f.read()))
             barcodeService = BarcodeService()
             msg = barcodeService.uploadSerivce(path)
             result = Result(user=user_one,recognized=msg.get("msg"),udi=msg.get("data"),img_path="/"+path)
             result.save()
+            context["msg"] = msg.get("msg")
+            context["data"] = msg.get("data")
             return render(request, 'home/index.html', context)
     else:
         form = UploadFileForm()
@@ -36,7 +37,7 @@ def index(request):
 
 @login_required(login_url="/login/")
 def dashboard(request):
-    results = Result.objects.filter(user_id = request.user.id).all().order_by('-dates')
+    results = Result.objects.filter(user_id = request.user.id).all().order_by('-dates')[:10]
     context = {'segment': 'dashboard', "results" : results}
     return render(request, 'home/dashboard.html', context)
 
