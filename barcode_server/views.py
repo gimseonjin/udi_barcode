@@ -4,8 +4,6 @@ This is Views(business logic) in Barcode_server
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse, HttpResponseRedirect
-from django.template import loader
 
 from barcode_server.forms import LoginForm, SignUpForm
 from barcode_server.models import Result
@@ -45,8 +43,7 @@ def login_view(request):
             if user is not None:
                 login(request, user)
                 return redirect("/")
-            else:
-                msg = 'Invalid credentials'
+            msg = 'Invalid credentials'
         else:
             msg = 'Error validating the form'
 
@@ -63,7 +60,7 @@ def register_user(request):
             form.save()
             username = form.cleaned_data.get("username")
             raw_password = form.cleaned_data.get("password1")
-            user = authenticate(username=username, password=raw_password)
+            authenticate(username=username, password=raw_password)
 
             msg = 'User created - please <a href="/login">login</a>.'
             success = True

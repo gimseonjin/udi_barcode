@@ -7,10 +7,9 @@
 
 {% block content %}
 
-        <div class="row">
+        <div class="row login-card ">
           <div class="col-md-8">
             <div class="card">
-
               <form role="form" method="post" action="">
               
                 {% csrf_token %} 
@@ -27,36 +26,36 @@
                   </h6>
                 </div>
 
-                <div class="card-body">
-
-                    <div class="row">
-
-                      <div class="col-md-3 px-md-1">
+                <div class="login-card-body">
+                  <div class = "card-body-left">
+                    <img class = "login-img" id = "login-img" src="/static/logo.png" alt="Profile Photo"> 
+                  </div>
+                  <div class = "card-body-right">
+                    <div class="login-input-div">
+                      <div class="px-md-1">
                         <div class="form-group">
                           <label>Username</label>
                           {{ form.username }}
                         </div>
                       </div>
-
                     </div>
-                    <div class="row">
-
-                      <div class="col-md-3 px-md-1">
+                    <div class="login-input-div">
+                      <div class="px-md-1">
                         <div class="form-group">
                           <label>Password</label>
                           {{ form.password }}
                         </div>
                       </div>
-
                     </div>
-                    
+                  </div>
                 </div>
-                <div class="card-footer">
-                  <button type="submit" name="login" class="btn btn-fill btn-primary">Login</button>
-                  &nbsp; &nbsp;
-                  Don't have an account? <a href="/register" class="text-primary">Create</a>
+                <div class="login-card-footer">
+                  <div class = "login-footer-item">
+                    &nbsp; &nbsp;
+                    Don't have an account? <a href="/register" class="text-primary">Create</a>
+                  </div>
+                  <button type="submit" name="login" class="btn btn-fill login-footer-item">Login</button>
                 </div>
-
               </form>
 
             </div>

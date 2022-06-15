@@ -24,7 +24,7 @@
   <link rel="canonical" href="https://appseed.us/admin-dashboards/django-dashboard-black">
   
   <title>
-    Django Dashboard Black - {% block title %}{% endblock %} | AppSeed
+    Udi Barcode Recognition
   </title>
 
   <!--     Fonts and icons     -->
@@ -36,6 +36,7 @@
   <link href="/static/assets/css/black-dashboard.css?v=1.0.0" rel="stylesheet" />
   <!-- CSS Just for demo purpose, don't include it in your project -->
   <link href="/static/assets/demo/demo.css" rel="stylesheet" />
+  <link href="/static/assets/css/logo.css" rel="stylesheet" />
 
   <!-- Specific Page CSS goes HERE  -->
   {% block stylesheets %}{% endblock stylesheets %}
@@ -44,8 +45,9 @@
 
 <body class="white-content">
   <div class="wrapper">
-
-    {% include 'includes/sidebar.html' %}
+    {% if request.get_full_path != "/login/" %}
+      {% include 'includes/sidebar.html' %}
+    {% endif %}
 
     <div class="main-panel" data="blue">
 

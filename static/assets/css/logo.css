@@ -1,0 +1,49 @@
+#logo-img {
+    width: 28%;
+  }
+
+#login-img {
+  width: 100%;
+}
+
+.login-card-body{
+    display: flex;
+    justify-content: space-between;
+}
+
+.card-body-left{
+    margin-left: 5%;
+    width: 50%;
+}
+
+.card-body-right{
+    width: 40%;
+}
+
+.form-control{
+    width: 100%;
+}
+
+.login-card-footer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-footer-item{
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-bottom: 3%;
+}
+
+.login-card{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 80vh;
+    margin-left: -20%;
+}
+
+.login-input-div{
+    margin-right: 15%;
+}

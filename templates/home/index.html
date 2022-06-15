@@ -16,7 +16,7 @@
                   Input Your UDI Barcode Image! 
               </h4>
               <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                <button onclick="sendImage()" class="btn btn-primary mt-3">Click me</button>
+                <button onclick="sendImage()" class="btn mt-3">Click me</button>
               </div>
             </div>
               <div class="container col-md-12">
@@ -41,8 +41,12 @@
       frame.src = URL.createObjectURL(event.target.files[0]);
   }
   function sendImage() {
-      document.getElementById('formFile').value = null;
-      frame.src = "/static/assets/img/loading.gif";
+      if(document.getElementById('formFile').value != ""){
+        document.getElementById('formFile').value = null;
+        frame.src = "/static/assets/img/loading.gif";
+      }else{
+        alert("Input Image First!!")
+      }
   }
 </script>
 {% endblock javascripts %}
