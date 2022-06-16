@@ -1,7 +1,27 @@
+"""
+This is Barcode Service Test!!
+
+For find best case, test various cases
+"""
 import cv2
-from barcode_service import BarcodeService
+from barcode_server.service.barcode_service import BarcodeService
 
 def test_success_upload_read_frame():
+    """
+    Title : test_success_upload_read_frame
+
+    Find Best Case!!!
+
+    Test Case - case Num - "gray scale", "sharpening", "threshold"
+        "case 1" : [True, True, True],
+        "case 2" : [True, True, False],
+        "case 3" : [True, False, True],
+        "case 4" : [False, True, True],
+        "case 5" : [True, False, False],
+        "case 6" : [False, True, False],
+        "case 7" : [False, False, True],
+        "case 8" : [False, False, False],
+    """
 
     service = BarcodeService()
 
@@ -16,13 +36,13 @@ def test_success_upload_read_frame():
         "case 7" : [False, False, True],
         "case 8" : [False, False, False],
     }
-    
+
     targets = []
     for i in range(1,25):
         targets.append("barcode_" + str(i) + ".jpeg")
 
-    result_list = dict()
     # when
+    result_list = {}
     for k, case in cases.items():
         success_case = 0
 
@@ -32,17 +52,18 @@ def test_success_upload_read_frame():
 
             preprocessed_img = service.preprocessing(img=img, gray=case[0], sharpen= case[1], threshold= case[2])
 
-            result = service._read_frame(preprocessed_img)
+            result = service.read_frame(preprocessed_img)
 
-            if result.get("msg") : 
+            if result.get("msg") :
                 success_case += 1
 
         rate = success_case / len(targets)
 
         result_list[k] = rate
-    
+
     result_list = sorted(result_list.items(), key=lambda x : x[1], reverse=True)
-    
+
+    # then
     for result in result_list:
         case = cases[result[0]]
         print()

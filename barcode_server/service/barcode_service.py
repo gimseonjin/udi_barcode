@@ -44,7 +44,7 @@ class BarcodeService:
 
         i = self.preprocessing(img)
 
-        itemResultDto = self._read_frame(i, path)
+        itemResultDto = self.read_frame(i, path)
 
         return itemResultDto
 
@@ -89,9 +89,9 @@ class BarcodeService:
 
         return result
 
-    def _read_frame(self, img, path:str = None):
+    def read_frame(self, img, path:str = None):
         """
-        Title : _read_frame
+        Title : read_frame
 
         This is read frame form preprocessed img
 
@@ -136,7 +136,7 @@ class BarcodeService:
 
             return {"msg" : True, "data": result }
 
-        except FileNotFoundError as e:
+        except FileNotFoundError:
             return {"msg" : False, "data": "None" }
 
     def _read_barcode(self, value:str):
