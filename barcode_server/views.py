@@ -10,12 +10,23 @@ from django.core.files.base import ContentFile
 from barcode_server.forms import LoginForm, SignUpForm, UploadFileForm
 from barcode_server.models import Result, User
 from barcode_server.barcode_service import BarcodeService
-from barcode_server.models import User
 
 # Create your views here.
 
+
 @login_required(login_url="/login/")
 def index(request):
+    '''
+    Title : index
+
+    This is index, main page view
+
+    This page do recognize barcode logic
+
+    return:
+        GET : return home/index.html
+        POST : return home/index.html with result
+    '''
     context = {'segment': 'index'}
     if request.method == 'POST':
         form = UploadFileForm(request.POST, request.FILES)
@@ -37,6 +48,16 @@ def index(request):
 
 @login_required(login_url="/login/")
 def dashboard(request):
+    '''
+    Title : dashboard
+
+    This is dashboard view
+
+    This page return histories
+
+    return:
+        All : return home/dashboard.html
+    '''
     results = Result.objects.filter(user_id = request.user.id).all().order_by('-dates')[:10]
     context = {'segment': 'dashboard', "results" : results}
     return render(request, 'home/dashboard.html', context)
@@ -44,16 +65,36 @@ def dashboard(request):
 
 @login_required(login_url="/login/")
 def user_page(request):
+    '''
+    TODO : Add update user date form!
+
+    Title : user_page
+
+    This is user_page view
+
+    This page return user data
+
+    return:
+        All : return home/page-user.html
+    '''
     context = {'segment': 'user'}
     return render(request, 'home/page-user.html', context)
 
 def login_view(request):
+    '''
+    Title : login_view
+
+    This is login view
+
+    It has login form to login logic
+
+    return:
+        GET : return home/dashboard.html
+        POST : return home/dashboard.html with result of login
+    '''
     form = LoginForm(request.POST or None)
-
     msg = None
-
     if request.method == "POST":
-
         if form.is_valid():
             username = form.cleaned_data.get("username")
             password = form.cleaned_data.get("password")
@@ -64,14 +105,27 @@ def login_view(request):
             msg = 'Invalid credentials'
         else:
             msg = 'Error validating the form'
-
     return render(request, "accounts/login.html", {"form": form, "msg": msg})
 
 
 def register_user(request):
+    '''
+    Title : register_user
+
+    This is register view
+
+    It has register form to register logic
+
+    return:
+        GET : return accounts/register.html
+        POST :
+            if sueccess :
+                redirect "/"
+            else :
+                return accounts/register.html with fail
+    '''
     msg = None
     success = False
-
     if request.method == "POST":
         form = SignUpForm(request.POST)
         if form.is_valid():
@@ -81,18 +135,23 @@ def register_user(request):
             username = form.cleaned_data.get("username")
             raw_password = form.cleaned_data.get("password1")
             authenticate(username=username, password=raw_password)
-
             msg = 'User created - please <a href="/login">login</a>.'
             success = True
-
         else:
             msg = 'Form is not valid'
     else:
         form = SignUpForm()
-
     return render(request, "accounts/register.html", {"form": form, "msg": msg, "success": success})
 
 
 def logout_view(request):
+    '''
+    Title : logout_view
+
+    This is logout view
+
+    return:
+        All : redirect login page
+    '''
     logout(request)
     return redirect("login")

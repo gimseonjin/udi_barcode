@@ -1,38 +1,112 @@
-from unittest import result
-import pyzbar.pyzbar as pyzbar
-import cv2
-from datetime import datetime
-import numpy as np
+"""
+This module has barcode service
+"""
 from pathlib import Path
+
+from pyzbar import pyzbar
+import cv2
+import numpy as np
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 class BarcodeService:
+    '''
+    Title : BarcodeService
 
+    This class is used to recognize to barcode
+
+    Attributes:
+        uploadSerivce (function) : This Function is used to recognize barcode default!
+    '''
     def uploadSerivce(self, path:str):
+        """
+        Title : uploadSerivce
+
+        This is Function which is used for recognize barcode!
+
+        Args:
+            path (string): input your img path
+
+        Returns:
+           if success :
+                return dict : {"msg" : True, "data": result }
+           if fail :
+                return {"msg" : False, "data": "None" }
+
+        Raises:
+            Notfound: If there is wrong img path, raise not found image!
+
+        Note:
+            Please use this function only!!!
+        """
 
         img = cv2.imread(path)
 
         i = self.preprocessing(img)
 
-        itemResultDto = self.read_frame(i, path)
+        itemResultDto = self._read_frame(i, path)
 
         return itemResultDto
-            
 
-    def preprocessing(self, img):
+    def preprocessing(self, img, gray=True, sharpen=False, threshold=False):
+        """
+        Title : preprocessing
 
-        gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+        This Function is preporcessing img
 
-        kernel_sharpen_1 = np.array([[1,-2,1],[-2,5,-2],[1,-2,1]])
+        Args:
+            img (Object) : input img Object from opencv
+            gray (boolean) : If you want control gray scale, input here
+                             default True
+            sharpen (boolean) : If you want control gray scale, input here
+                                default False
+            threshold (boolean) : If you want control gray scale, input here
+                                  default False
 
-        f_image = cv2.filter2D(gray,-1,kernel_sharpen_1)
+        Returns:
+            result (Object) : preporcessing result
 
-        ret, i = cv2.threshold(gray, 100, 255, cv2.THRESH_BINARY)
+        Raises:
+            -
 
-        return gray
-    
-    def read_frame(self, img, path):
+        Note:
+            Please use uploadSerivce logic
+        """
+        if gray:
+            result = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+
+        if sharpen:
+            kernel_sharpen_1 = np.array([[1,-2,1],[-2,5,-2],[1,-2,1]])
+            result = cv2.filter2D(result,-1,kernel_sharpen_1)
+
+        if threshold :
+            thresh_result = cv2.threshold(result, 100, 255, cv2.THRESH_BINARY)
+            result = thresh_result[1]
+
+        return result
+
+    def _read_frame(self, img, path:str):
+        """
+        Title : _read_frame
+
+        This is read frame form preprocessed img
+
+        Args:
+            img (Object) : input img object from opencv
+            path (string) : input your img path to save img
+
+        Returns:
+           if success :
+                return dict : {"msg" : True, "data": result }
+           if fail :
+                return {"msg" : False, "data": "None" }
+
+        Raises:
+            -
+
+        Note:
+            Please use uploadSerivce logic
+        """
         try:
             decorded = pyzbar.decode(img)
 
@@ -40,18 +114,37 @@ class BarcodeService:
 
             for d in decorded:
                 cv2.rectangle(img, (d.rect[0], d.rect[1]), (d.rect[0] + d.rect[2], d.rect[1] + d.rect[3]), (0, 0, 255), 5)
-            
+
             cv2.imwrite("./"+path, img)
 
-            result = self.read_barcode(value)
+            result = self._read_barcode(value)
 
             return {"msg" : True, "data": result }
 
-        except Exception as e:
-
+        except IndexError :
             return {"msg" : False, "data": "None" }
-    
-    def read_barcode(self, value):
+
+    def _read_barcode(self, value:str):
+        """
+        Title : _read_barcode
+
+        This is serializate from img to udi barcode
+
+        Args:
+            value (string): get data from barcode
+
+        Returns:
+           if success :
+                return string : uid data
+           if fail :
+                return string : "
+
+        Raises:
+            -
+
+        Note:
+            Please use uploadSerivce logic
+        """
         value = value.replace('\u001d', '')
         count = 2
         str_list = []
@@ -73,5 +166,5 @@ class BarcodeService:
                 count = len(value)
 
         result = "-".join(str_list)
-        
+
         return result
