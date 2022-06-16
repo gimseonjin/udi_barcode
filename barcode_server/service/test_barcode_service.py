@@ -20,7 +20,7 @@ def test_success_upload_read_frame():
     targets = []
     result_list = dict()
 
-    for i in range(1,24):
+    for i in range(1,25):
         targets.append("barcode_" + str(i) + ".jpeg")
 
     # when
