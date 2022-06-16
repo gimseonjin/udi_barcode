@@ -98,15 +98,32 @@
 
 # Something Special
 
-## ✨Using only gray scale is the best performance, and improved about 13% performance.✨
+<br/>
+<br/>
+
+## ✨Using only gray scale is the best performance, and improved about 12% performance.✨
+
+<br/>
+<br/>
 
 ## How to improve recognition performance??
 
 ### In various articles about barcode recognition, They use "gray-scale, sharpening, threshold" to improve performance!
 
--> article 1
--> article 2
--> article 3
+gray-scale
+<p align="center">
+  <img src = "https://github.com/gimseonjin/udi_barcode/blob/main/readme_img/gray_scale.png" width = "80%">
+</p>
+
+sharpening
+<p align="center">
+  <img src = "https://github.com/gimseonjin/udi_barcode/blob/main/readme_img/sharpening.png" width = "80%">
+</p>
+
+threshold
+<p align="center">
+  <img src = "https://github.com/gimseonjin/udi_barcode/blob/main/readme_img/threshold.png" width = "80%">
+</p>
 
 <br/>
 
@@ -171,10 +188,11 @@ for result in result_list:
 
 <br/>
 
-### Result
--> result img
+### Result - Improve performance 66% to 79% (about 12%!!!)
+<p align="center">
+  <img src = "https://github.com/gimseonjin/udi_barcode/blob/main/readme_img/test_result.jpg" width = "80%">
+</p>
 <br/>
-
 <br/>
 <br/>
 
