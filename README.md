@@ -1,8 +1,8 @@
-# UDI Barcode
-
-# **Title :** UDI Barcode
+# ✨ UDI Barcode ✨
 
 ## **description : Input UDI Barcode image, Interpret it!**
+
+<img src = "https://github.com/gimseonjin/udi_barcode/blob/main/readme_img/logo.png" width = "100%">
 
 # **Why pick this?**
 
@@ -10,26 +10,27 @@
 
 ### In Koreat, **UDI barcodes must be attached to medical devices**
 
+![UDI%20Barcode%20f9c2e002d6f74ae5abb4d4931a6c8c7a/Untitled.png](https://github.com/gimseonjin/udi_barcode/blob/main/readme_img/reason_1.png)
 
 ## **2. UDI barcode scanner is expensive**
 
 ### UDI barcode scanner is too expensive!!
 
-
+![UDI%20Barcode%20f9c2e002d6f74ae5abb4d4931a6c8c7a/Untitled.png](https://github.com/gimseonjin/udi_barcode/blob/main/readme_img/reason_2.png)
 
 ## **3. Practice Open CV!**
 
 ### To Recognize UDI barcode, should use Open CV!
 
-
+<img src = "https://github.com/gimseonjin/udi_barcode/blob/main/readme_img/reason_3.png" width = "100%">
 
 # **ERD Diagram**
 
-
+![UDI%20Barcode%20f9c2e002d6f74ae5abb4d4931a6c8c7a/Untitled.png](https://github.com/gimseonjin/udi_barcode/blob/main/readme_img/erd.png)
 
 # **Project Structure**
 
-
+![UDI%20Barcode%20f9c2e002d6f74ae5abb4d4931a6c8c7a/Untitled.png](https://github.com/gimseonjin/udi_barcode/blob/main/readme_img/structure.jpg)
 
 # **Project Logic and Views**
 
@@ -37,47 +38,45 @@
 
 ### Before use this service, Login First!!
 
-
+![UDI%20Barcode%20f9c2e002d6f74ae5abb4d4931a6c8c7a/Untitled.png](https://github.com/gimseonjin/udi_barcode/blob/main/readme_img/example_1.png)
 
 ### If you first, Register before!
 
-
+![UDI%20Barcode%20f9c2e002d6f74ae5abb4d4931a6c8c7a/Untitled.png](https://github.com/gimseonjin/udi_barcode/blob/main/readme_img/example_2.png)
 
 ## **Main Page**
 
 ### After Login, you can enter main page
 
-
+![UDI%20Barcode%20f9c2e002d6f74ae5abb4d4931a6c8c7a/Untitled.png](https://github.com/gimseonjin/udi_barcode/blob/main/readme_img/example_3.png)
 
 ### Input your UDI barcode, and send image using click me button!
 
-
+![UDI%20Barcode%20f9c2e002d6f74ae5abb4d4931a6c8c7a/Untitled.png](https://github.com/gimseonjin/udi_barcode/blob/main/readme_img/example_4.png)
 
 ### Then, return UDI barcode and result!
 
-
+![UDI%20Barcode%20f9c2e002d6f74ae5abb4d4931a6c8c7a/Untitled.png](https://github.com/gimseonjin/udi_barcode/blob/main/readme_img/example_5.png)
 
 ### If you input wrong image or b**arcode difficult to recognize, return None and False**
 
-
+![UDI%20Barcode%20f9c2e002d6f74ae5abb4d4931a6c8c7a/Untitled.png](https://github.com/gimseonjin/udi_barcode/blob/main/readme_img/example_6.png)
 
 ## **Dashboard Page**
 
 ### You can see histories in Dashboard page
 
-
+![UDI%20Barcode%20f9c2e002d6f74ae5abb4d4931a6c8c7a/Untitled.png](https://github.com/gimseonjin/udi_barcode/blob/main/readme_img/example_7.png)
 
 ### If you want see history, Click one!
 
-
-
-
+![UDI%20Barcode%20f9c2e002d6f74ae5abb4d4931a6c8c7a/Untitled.png](https://github.com/gimseonjin/udi_barcode/blob/main/readme_img/example_8.png)
 
 ## My Page
 
 ### Update your personal data!
 
-
+![UDI%20Barcode%20f9c2e002d6f74ae5abb4d4931a6c8c7a/Untitled.png](https://github.com/gimseonjin/udi_barcode/blob/main/readme_img/example_9.png)
 
 # How To Run
 
