@@ -18,15 +18,14 @@ def test_success_upload_read_frame():
     }
     
     targets = []
-    result_list = dict()
-
     for i in range(1,25):
         targets.append("barcode_" + str(i) + ".jpeg")
 
+    result_list = dict()
     # when
     for k, case in cases.items():
-        value_results = []
-        index_results = []
+        success_case = 0
+
         for target in targets:
 
             img = cv2.imread('sample_udi/' + target)
@@ -35,16 +34,12 @@ def test_success_upload_read_frame():
 
             result = service._read_frame(preprocessed_img)
 
-            value_results.append(result.get("msg"))
+            if result.get("msg") : 
+                success_case += 1
 
-    
-        for index, result in enumerate(value_results):
-            if result:
-                index_results.append(index)
+        rate = success_case / len(targets)
 
-        point = len(index_results) / len(targets)
-
-        result_list[k] = point
+        result_list[k] = rate
     
     result_list = sorted(result_list.items(), key=lambda x : x[1], reverse=True)
     
