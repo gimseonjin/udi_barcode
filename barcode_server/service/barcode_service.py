@@ -48,7 +48,7 @@ class BarcodeService:
 
         return itemResultDto
 
-    def preprocessing(self, img, gray=True, sharpen=False, threshold=False):
+    def preprocessing(self, img, gray=True, sharpen=True, threshold=False):
         """
         Title : preprocessing
 
@@ -70,8 +70,12 @@ class BarcodeService:
             -
 
         Note:
+            Waring!!!!! sharpen is should use with threshold!!!
+
             Please use uploadSerivce logic
         """
+        result = img
+
         if gray:
             result = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
@@ -85,7 +89,7 @@ class BarcodeService:
 
         return result
 
-    def _read_frame(self, img, path:str):
+    def _read_frame(self, img, path:str = None):
         """
         Title : _read_frame
 
@@ -102,7 +106,8 @@ class BarcodeService:
                 return {"msg" : False, "data": "None" }
 
         Raises:
-            -
+            if there is no barcode data, raise FileFoundError
+            But Don't worry! handle here!
 
         Note:
             Please use uploadSerivce logic
@@ -110,18 +115,28 @@ class BarcodeService:
         try:
             decorded = pyzbar.decode(img)
 
-            value = decorded[0].data.decode('utf-8')
+            # Not Found barcord, raise Not Found Error
+            if not decorded:
+                raise FileNotFoundError()
 
+            value = "--"
+            # If find wrong barcode(ex looks like barcode, but not), Filterd here
             for d in decorded:
+                if len(d.data.decode('utf-8')) != 0 :
+                    value = d.data.decode('utf-8')
                 cv2.rectangle(img, (d.rect[0], d.rect[1]), (d.rect[0] + d.rect[2], d.rect[1] + d.rect[3]), (0, 0, 255), 5)
 
-            cv2.imwrite("./"+path, img)
+            if value == "--":
+                raise FileNotFoundError()
+
+            if path is not None:
+                cv2.imwrite("./"+path, img)
 
             result = self._read_barcode(value)
 
             return {"msg" : True, "data": result }
 
-        except IndexError :
+        except FileNotFoundError as e:
             return {"msg" : False, "data": "None" }
 
     def _read_barcode(self, value:str):
