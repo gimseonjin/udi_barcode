@@ -45,7 +45,7 @@
 
 <body class="white-content">
   <div class="wrapper">
-    {% if request.get_full_path != "/login/" %}
+    {% if request.user.is_authenticated %}
       {% include 'includes/sidebar.html' %}
     {% endif %}
 

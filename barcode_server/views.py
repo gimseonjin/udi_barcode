@@ -9,7 +9,7 @@ from django.core.files.base import ContentFile
 
 from barcode_server.forms import LoginForm, SignUpForm, UploadFileForm
 from barcode_server.models import Result, User
-from barcode_server.service.BarcodeService import BarcodeService
+from barcode_server.barcode_service import BarcodeService
 from barcode_server.models import User
 
 # Create your views here.
