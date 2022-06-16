@@ -4,6 +4,8 @@
 
 <img src = "https://github.com/gimseonjin/udi_barcode/blob/main/readme_img/logo.png" width = "100%">
 
+<br/>
+
 # **Why pick this?**
 
 ## **1. It is necessary**
@@ -24,13 +26,25 @@
 
 <img src = "https://github.com/gimseonjin/udi_barcode/blob/main/readme_img/reason_3.png" width = "100%">
 
+<br/>
+
 # **ERD Diagram**
 
 ![UDI%20Barcode%20f9c2e002d6f74ae5abb4d4931a6c8c7a/Untitled.png](https://github.com/gimseonjin/udi_barcode/blob/main/readme_img/erd.png)
 
+<br/>
+
 # **Project Structure**
 
+## Infra Structure
 ![UDI%20Barcode%20f9c2e002d6f74ae5abb4d4931a6c8c7a/Untitled.png](https://github.com/gimseonjin/udi_barcode/blob/main/readme_img/structure.jpg)
+
+## Folder Structure
+<p align="center">
+  <img src = "https://github.com/gimseonjin/udi_barcode/blob/main/readme_img/folder_structure.png" width = "50%">
+</p>
+
+<br/>
 
 # **Project Logic and Views**
 
@@ -72,11 +86,97 @@
 
 ![UDI%20Barcode%20f9c2e002d6f74ae5abb4d4931a6c8c7a/Untitled.png](https://github.com/gimseonjin/udi_barcode/blob/main/readme_img/example_8.png)
 
+![UDI%20Barcode%20f9c2e002d6f74ae5abb4d4931a6c8c7a/Untitled.png](https://github.com/gimseonjin/udi_barcode/blob/main/readme_img/example_9.png)
+
 ## My Page
 
 ### Update your personal data!
 
-![UDI%20Barcode%20f9c2e002d6f74ae5abb4d4931a6c8c7a/Untitled.png](https://github.com/gimseonjin/udi_barcode/blob/main/readme_img/example_9.png)
+![UDI%20Barcode%20f9c2e002d6f74ae5abb4d4931a6c8c7a/Untitled.png](https://github.com/gimseonjin/udi_barcode/blob/main/readme_img/example_10.png)
+
+<br/>
+
+# Something Special
+
+## ✨Using only gray scale is the best performance, and improved about 13% performance.✨
+
+## How to improve recognition performance??
+
+### In various articles about barcode recognition, They use "gray-scale, sharpening, threshold" to improve performance!
+
+-> article 1
+-> article 2
+-> article 3
+
+<br/>
+
+## So, Let's preprocess the image using "gray-scale, sharpening, threshold" before recognition!
+
+### First - Make cases about pre-processing
+
+~~~python
+    # "case Num" : ["gray-scale", "sharpening", "threshold"]
+    cases = {
+        "case 1" : [True, True, True],
+        "case 2" : [True, True, False],
+        "case 3" : [True, False, True],
+        "case 4" : [False, True, True],
+        "case 5" : [True, False, False],
+        "case 6" : [False, True, False],
+        "case 7" : [False, False, True],
+        "case 8" : [False, False, False],
+    }
+~~~
+
+### Second - Make test targets - (I made 25 img for test)
+
+~~~python
+    targets = []
+    for i in range(1,25):
+        targets.append("barcode_" + str(i) + ".jpeg")
+    }
+~~~
+
+### Third - For each target, Calculate rate!!
+~~~python
+for target in targets:
+
+  img = cv2.imread('sample_udi/' + target)
+  
+  preprocessed_img = service.preprocessing(img=img, gray=case[0], sharpen= case[1], threshold= case[2])
+  
+  result = service._read_frame(preprocessed_img)
+  
+    if result.get("msg") :
+      success_case += 1
+      
+# Divide success case and targets length
+rate = success_case / len(targets)
+
+result_list[k] = rate
+~~~
+
+### Fourth - Sorting results, and Show!
+~~~python
+result_list = sorted(result_list.items(), key=lambda x : x[1], reverse=True)
+    
+# then
+for result in result_list:
+  case = cases[result[0]]
+  print()
+  print(f"{result[0]} gray = {case[0]}, shrpen = {case[1]}, threshold = {case[2]}")
+  print(f"==> {result[1]}")
+  print()
+~~~
+
+<br/>
+
+### Result
+-> result img
+<br/>
+
+<br/>
+<br/>
 
 # How To Run
 
